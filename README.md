@@ -32,3 +32,8 @@ Mas para testarmos a API, usaremos o Postman, sendo uma ferramenta usada para te
 - Será um aplicativo com algumas opções, em que a pessoa que for usar pode fazer o CRUD, tanto de médicos quanto de pacientes e o agendamento e cancelamento das consultas.
 
 - A documentação das funcionalidades do projeto ficará em um quadro do Trello com cada uma das funcionalidades. Em cada cartão teremos a descrição de cada funcionalidade, com as regras e validações que vamos implementar ao longo do projeto..
+
+
+# Link o Trello:
+    https://trello.com/b/O0lGCsKb/api-voll-med
+
