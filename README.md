@@ -11,6 +11,7 @@
     JPA/Hibernate
     Maven
     Postman
+    DTO (Data Transfer Object), via Java Records
 
 Faremos tudo isso usando algumas tecnologias, como Spring Boot 3, sendo a última versão disponibilizada pelo framework. Usaremos, também, o Java 17 sendo a última versão LTS (Long-term support, em português "Suporte de longo prazo") que possui maior tempo de suporte disponível para o Java.
 
