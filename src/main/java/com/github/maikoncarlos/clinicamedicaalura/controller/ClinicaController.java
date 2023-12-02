@@ -4,6 +4,7 @@ import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosCadastroPacienteRequest;
 import com.github.maikoncarlos.clinicamedicaalura.service.MedicoService;
 import com.github.maikoncarlos.clinicamedicaalura.service.PacienteService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,13 +22,13 @@ public class ClinicaController {
 
     @PostMapping(value = "medicos")
     @Transactional
-    public void cadastrarMedicos(@RequestBody DadosCadastroMedicoRequest dadosMedico){
+    public void cadastrarMedicos(@RequestBody @Valid DadosCadastroMedicoRequest dadosMedico){
        medicoService.cadastrar(dadosMedico);
 
     }
     @PostMapping(value = "pacientes")
     @Transactional
-    public void cadastrarPacientes(@RequestBody DadosCadastroPacienteRequest dadosPaciente){
+    public void cadastrarPacientes(@RequestBody @Valid DadosCadastroPacienteRequest dadosPaciente){
         pacienteService.cadastrar(dadosPaciente);
     }
 }
