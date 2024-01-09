@@ -6,16 +6,17 @@ import jakarta.validation.constraints.Size;
 
 public record DadosEndereco(
         @NotBlank
-        String logradouro,
-        @NotBlank
-        String bairro,
-        @NotBlank
         @Pattern (regexp = "\\d{8}")
         String cep,
+        @NotBlank
+        String logradouro,
+        String numero,
+        String complemento,
+        @NotBlank
+        String bairro,
         @NotBlank
         String cidade,
         @NotBlank
         @Size (max = 2)
-        String uf,
-        String complemento,
-        String numero) { }
+        String uf) {
+}
