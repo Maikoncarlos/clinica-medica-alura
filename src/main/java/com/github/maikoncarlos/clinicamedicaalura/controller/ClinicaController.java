@@ -2,6 +2,7 @@ package com.github.maikoncarlos.clinicamedicaalura.controller;
 
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.DadosCadastroMedicoRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosCadastroPacienteRequest;
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosMedicoResumido;
 import com.github.maikoncarlos.clinicamedicaalura.service.MedicoService;
 import com.github.maikoncarlos.clinicamedicaalura.service.PacienteService;
 import jakarta.validation.Valid;
@@ -9,6 +10,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "v1/clinica-voll")
@@ -31,4 +34,11 @@ public class ClinicaController {
     public void cadastrarPacientes(@RequestBody @Valid DadosCadastroPacienteRequest dadosPaciente){
         pacienteService.cadastrar(dadosPaciente);
     }
+
+    @GetMapping(value = "medicos/listAll")
+    public List<DadosMedicoResumido> listAll(){
+        return medicoService.findAll();
+
+    }
+
 }

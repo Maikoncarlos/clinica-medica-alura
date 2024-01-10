@@ -15,7 +15,6 @@ public class PacienteService {
 
     public void cadastrar(DadosCadastroPacienteRequest dadosPaciente) {
         var paciente = mapper.toPaciente(dadosPaciente);
-        System.out.println(paciente.toString());
         repository.save(paciente);
     }
 }
