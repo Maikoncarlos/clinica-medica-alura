@@ -3,6 +3,7 @@ package com.github.maikoncarlos.clinicamedicaalura.controller;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.DadosCadastroMedicoRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosCadastroPacienteRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosMedicoResumido;
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosPacientesResumido;
 import com.github.maikoncarlos.clinicamedicaalura.service.MedicoService;
 import com.github.maikoncarlos.clinicamedicaalura.service.PacienteService;
 import jakarta.validation.Valid;
@@ -36,9 +37,15 @@ public class ClinicaController {
         pacienteService.cadastrar(dadosPaciente);
     }
 
-    @GetMapping(value = "medicos/listAll")
-    public Page<DadosMedicoResumido> listAll(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
+    @GetMapping(value = "medicos/listaPaginada")
+    public Page<DadosMedicoResumido> listarTodosMedicosPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
         return medicoService.findAll(paginacao);
+
+    }
+
+    @GetMapping(value = "pacientes/listaPaginada")
+    public Page<DadosPacientesResumido> listarTodosPacientesPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
+        return pacienteService.findAll(paginacao);
 
     }
 
