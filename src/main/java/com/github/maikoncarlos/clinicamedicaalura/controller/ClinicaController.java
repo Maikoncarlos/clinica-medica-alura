@@ -7,11 +7,12 @@ import com.github.maikoncarlos.clinicamedicaalura.service.MedicoService;
 import com.github.maikoncarlos.clinicamedicaalura.service.PacienteService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "v1/clinica-voll")
@@ -36,8 +37,8 @@ public class ClinicaController {
     }
 
     @GetMapping(value = "medicos/listAll")
-    public List<DadosMedicoResumido> listAll(){
-        return medicoService.findAll();
+    public Page<DadosMedicoResumido> listAll(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
+        return medicoService.findAll(paginacao);
 
     }
 
