@@ -5,9 +5,9 @@ import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosM
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.MedicoRepository;
 import com.github.maikoncarlos.clinicamedicaalura.service.mapper.ClinicaMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +21,8 @@ public class MedicoService {
         repository.save(medico);
     }
 
-    public List<DadosMedicoResumido> findAll() {
-        return mapper.toMedicoResumido(repository.findAll());
+    public Page<DadosMedicoResumido> findAll(Pageable paginacao) {
+//        return mapper.toMedicoResumido(repository.findAll(paginacao));
+        return repository.findAll(paginacao).map(DadosMedicoResumido::new);
     }
 }
