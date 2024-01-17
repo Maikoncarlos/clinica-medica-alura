@@ -3,6 +3,7 @@ package com.github.maikoncarlos.clinicamedicaalura.controller.dto.response;
 import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.Paciente;
 
 public record DadosPacientesResumido(
+        Long id,
 
         String nome,
 
@@ -12,6 +13,6 @@ public record DadosPacientesResumido(
 
         String cpf) {
     public DadosPacientesResumido(Paciente paciente) {
-        this(paciente.getNome(), paciente.getEmail(), paciente.getTelefone(), paciente.getCpf());
+        this(paciente.getId(), paciente.getNome(), paciente.getEmail(), paciente.getTelefone(), paciente.getCpf());
     }
 }
