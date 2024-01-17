@@ -1,5 +1,6 @@
 package com.github.maikoncarlos.clinicamedicaalura.repository.medico;
 
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.DadosAtualizacaoMedico;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.Especialidade;
 import com.github.maikoncarlos.clinicamedicaalura.repository.Endereco;
 import jakarta.persistence.*;
@@ -21,4 +22,15 @@ public class Medico {
     @Embedded
     private Endereco endereco;
 
+    public void atualizarDadosMedicos(DadosAtualizacaoMedico medico) {
+        if(medico.nome() != null){
+            this.nome = medico.nome();
+        }
+        if(medico.telefone() != null){
+            this.telefone= medico.telefone();
+        }
+        if(medico.endereco() != null){
+            this.endereco.atualizarEndereco(medico.endereco());
+        }
+    }
 }

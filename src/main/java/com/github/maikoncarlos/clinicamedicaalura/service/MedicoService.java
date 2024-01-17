@@ -2,6 +2,7 @@ package com.github.maikoncarlos.clinicamedicaalura.service;
 
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.DadosCadastroMedicoRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosMedicoResumido;
+import com.github.maikoncarlos.clinicamedicaalura.repository.medico.Medico;
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.MedicoRepository;
 import com.github.maikoncarlos.clinicamedicaalura.service.mapper.ClinicaMapper;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,9 @@ public class MedicoService {
     public Page<DadosMedicoResumido> findAll(Pageable paginacao) {
 //        return mapper.toMedicoResumido(repository.findAll(paginacao));
         return repository.findAll(paginacao).map(DadosMedicoResumido::new);
+    }
+
+    public Medico getMedicoPorId(Long id) {
+       return repository.getReferenceById(id);
     }
 }
