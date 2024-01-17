@@ -33,6 +33,7 @@ public class ClinicaController {
        medicoService.cadastrar(dadosMedico);
 
     }
+
     @PostMapping(value = "pacientes")
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
@@ -42,8 +43,7 @@ public class ClinicaController {
 
     @GetMapping(value = "medicos/listaPaginada")
     public Page<DadosMedicoResumido> listarTodosMedicosPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
-        return medicoService.findAll(paginacao);
-
+        return medicoService.findAllAtivos(paginacao);
     }
 
     @GetMapping(value = "pacientes/listaPaginada")

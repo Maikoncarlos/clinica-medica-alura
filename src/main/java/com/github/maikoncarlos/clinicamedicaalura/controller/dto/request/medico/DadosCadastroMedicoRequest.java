@@ -13,7 +13,6 @@ public record DadosCadastroMedicoRequest(
         @NotBlank
         @Email
         String email,
-
         @NotBlank
         @Pattern(regexp = "\\d{9}")
         String telefone,
