@@ -34,4 +34,9 @@ public class Medico {
             this.endereco.atualizarEndereco(medico.endereco());
         }
     }
+
+    public void inativar() {
+        this.ativo = false;
+
+    }
 }

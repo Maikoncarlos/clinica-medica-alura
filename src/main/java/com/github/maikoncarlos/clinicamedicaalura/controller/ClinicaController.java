@@ -49,7 +49,6 @@ public class ClinicaController {
     @GetMapping(value = "pacientes/listaPaginada")
     public Page<DadosPacientesResumido> listarTodosPacientesPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
         return pacienteService.findAll(paginacao);
-
     }
 
     @PutMapping(value = "medicos")
@@ -57,6 +56,14 @@ public class ClinicaController {
     public void atualizarDadosMedicos(@RequestBody @Valid DadosAtualizacaoMedico dadosAtualizacaoMedico){
        var medico = medicoService.getMedicoPorId(dadosAtualizacaoMedico.id());
        medico.atualizarDadosMedicos(dadosAtualizacaoMedico);
+    }
+
+    @DeleteMapping(value = "medicos/{id}")
+    @Transactional
+    public void deletarMedico(@PathVariable("id") Long id){
+        var medico = medicoService.getMedicoPorId(id);
+        medico.inativar();
+
     }
 
 }
