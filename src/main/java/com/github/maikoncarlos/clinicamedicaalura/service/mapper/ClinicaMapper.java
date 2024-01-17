@@ -7,11 +7,13 @@ import com.github.maikoncarlos.clinicamedicaalura.repository.Endereco;
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.Medico;
 import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.Paciente;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper
 public interface ClinicaMapper {
 
     Paciente toPaciente(DadosCadastroPacienteRequest request);
+    @Mapping(constant = "true", target = "ativo")
     Medico toMedico(DadosCadastroMedicoRequest request);
     Endereco map(DadosEndereco value);
 }
