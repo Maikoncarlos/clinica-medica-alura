@@ -22,9 +22,9 @@ public class MedicoService {
         repository.save(medico);
     }
 
-    public Page<DadosMedicoResumido> findAll(Pageable paginacao) {
+    public Page<DadosMedicoResumido> findAllAtivos(Pageable paginacao) {
 //        return mapper.toMedicoResumido(repository.findAll(paginacao));
-        return repository.findAll(paginacao).map(DadosMedicoResumido::new);
+        return repository.findAllByAtivoTrue(paginacao).map(DadosMedicoResumido::new);
     }
 
     public Medico getMedicoPorId(Long id) {

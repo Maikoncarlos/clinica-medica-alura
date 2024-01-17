@@ -21,6 +21,7 @@ public class Medico {
     private Especialidade especialidade;
     @Embedded
     private Endereco endereco;
+    private Boolean ativo;
 
     public void atualizarDadosMedicos(DadosAtualizacaoMedico medico) {
         if(medico.nome() != null){
