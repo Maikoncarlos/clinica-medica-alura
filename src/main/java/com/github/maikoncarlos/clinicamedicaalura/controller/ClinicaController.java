@@ -75,4 +75,13 @@ public class ClinicaController {
         paciente.atualizarDadosMedicos(dadosAtualizacaoPaciente);
     }
 
+    @DeleteMapping(value = "pacientes/{id}")
+    @Transactional
+    public void deletarPaciente(@PathVariable("id") Long id){
+        var paciente = pacienteService.getMedicoPorId(id);
+        paciente.inativar();
+
+    }
+
+
 }
