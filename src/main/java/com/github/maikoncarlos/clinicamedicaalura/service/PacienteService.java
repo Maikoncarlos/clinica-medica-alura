@@ -2,6 +2,7 @@ package com.github.maikoncarlos.clinicamedicaalura.service;
 
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosCadastroPacienteRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosPacientesResumido;
+import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.Paciente;
 import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.PacienteRepository;
 import com.github.maikoncarlos.clinicamedicaalura.service.mapper.ClinicaMapper;
 import lombok.AllArgsConstructor;
@@ -21,8 +22,8 @@ public class PacienteService {
         repository.save(paciente);
     }
 
-    public Page<DadosPacientesResumido> findAll(Pageable paginacao) {
-        return repository.findAll(paginacao).map(DadosPacientesResumido::new);
+    public Page<DadosPacientesResumido> findAllAtivos(Pageable paginacao) {
+        return repository.findAllByAtivoTrue(paginacao).map(DadosPacientesResumido::new);
     }
 
     public Paciente getMedicoPorId(Long id) {

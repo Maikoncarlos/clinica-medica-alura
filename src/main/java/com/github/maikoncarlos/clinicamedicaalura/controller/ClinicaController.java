@@ -51,7 +51,7 @@ public class ClinicaController {
 
     @GetMapping(value = "pacientes/listaPaginada")
     public Page<DadosPacientesResumido> listarTodosPacientesPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
-        return pacienteService.findAll(paginacao);
+        return pacienteService.findAllAtivos(paginacao);
     }
 
     @PutMapping(value = "medicos")

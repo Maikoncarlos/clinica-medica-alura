@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 
 @Mapper
 public interface ClinicaMapper {
-
+    @Mapping(constant = "true", target = "ativo")
     Paciente toPaciente(DadosCadastroPacienteRequest request);
     @Mapping(constant = "true", target = "ativo")
     Medico toMedico(DadosCadastroMedicoRequest request);
