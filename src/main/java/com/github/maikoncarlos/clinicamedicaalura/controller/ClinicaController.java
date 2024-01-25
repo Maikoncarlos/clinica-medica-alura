@@ -2,10 +2,12 @@ package com.github.maikoncarlos.clinicamedicaalura.controller;
 
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.DadosAtualizacaoMedico;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.DadosCadastroMedicoRequest;
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosAtualizacaoPaciente;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosCadastroPacienteRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosMedicoResumido;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosPacientesResumido;
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.MedicoRepository;
+import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.PacienteRepository;
 import com.github.maikoncarlos.clinicamedicaalura.service.MedicoService;
 import com.github.maikoncarlos.clinicamedicaalura.service.PacienteService;
 import jakarta.validation.Valid;
@@ -25,6 +27,7 @@ public class ClinicaController {
     private MedicoService medicoService;
     private PacienteService pacienteService;
     private final MedicoRepository medicoRepository;
+    private final PacienteRepository pacienteRepository;
 
     @PostMapping(value = "medicos")
     @Transactional
@@ -63,7 +66,13 @@ public class ClinicaController {
     public void deletarMedico(@PathVariable("id") Long id){
         var medico = medicoService.getMedicoPorId(id);
         medico.inativar();
+    }
 
+    @PutMapping(value = "pacientes")
+    @Transactional
+    public void atualizarDadosPacientes(@RequestBody @Valid DadosAtualizacaoPaciente dadosAtualizacaoPaciente){
+        var paciente = pacienteService.getMedicoPorId(dadosAtualizacaoPaciente.id());
+        paciente.atualizarDadosMedicos(dadosAtualizacaoPaciente);
     }
 
 }

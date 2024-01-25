@@ -24,4 +24,9 @@ public class PacienteService {
     public Page<DadosPacientesResumido> findAll(Pageable paginacao) {
         return repository.findAll(paginacao).map(DadosPacientesResumido::new);
     }
+
+    public Paciente getMedicoPorId(Long id) {
+        return repository.getReferenceById(id);
+    }
+
 }
