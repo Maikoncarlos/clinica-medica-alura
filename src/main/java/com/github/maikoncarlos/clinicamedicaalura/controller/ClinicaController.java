@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,24 +35,12 @@ public class ClinicaController {
     @ResponseStatus(HttpStatus.CREATED)
     public void cadastrarMedicos(@RequestBody @Valid DadosCadastroMedicoRequest dadosMedico){
        medicoService.cadastrar(dadosMedico);
-
-    }
-
-    @PostMapping(value = "pacientes")
-    @Transactional
-    @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrarPacientes(@RequestBody @Valid DadosCadastroPacienteRequest dadosPaciente){
-        pacienteService.cadastrar(dadosPaciente);
     }
 
     @GetMapping(value = "medicos/listaPaginada")
-    public Page<DadosMedicoResumido> listarTodosMedicosPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
-        return medicoService.findAllAtivos(paginacao);
-    }
-
-    @GetMapping(value = "pacientes/listaPaginada")
-    public Page<DadosPacientesResumido> listarTodosPacientesPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
-        return pacienteService.findAllAtivos(paginacao);
+    public ResponseEntity<Page<DadosMedicoResumido>> listarTodosMedicosPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
+        Page<DadosMedicoResumido> medicosPaginados = medicoService.findAllAtivos(paginacao);
+        return ResponseEntity.ok(medicosPaginados);
     }
 
     @PutMapping(value = "medicos")
@@ -63,9 +52,22 @@ public class ClinicaController {
 
     @DeleteMapping(value = "medicos/{id}")
     @Transactional
-    public void deletarMedico(@PathVariable("id") Long id){
+    public ResponseEntity deletarMedico(@PathVariable("id") Long id){
         var medico = medicoService.getMedicoPorId(id);
         medico.inativar();
+        return ResponseEntity.noContent().build();
+    }
+    @PostMapping(value = "pacientes")
+    @Transactional
+    @ResponseStatus(HttpStatus.CREATED)
+    public void cadastrarPacientes(@RequestBody @Valid DadosCadastroPacienteRequest dadosPaciente){
+        pacienteService.cadastrar(dadosPaciente);
+    }
+
+    @GetMapping(value = "pacientes/listaPaginada")
+    public ResponseEntity<Page<DadosPacientesResumido>> listarTodosPacientesPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
+        Page<DadosPacientesResumido> pacientesPaginados = pacienteService.findAllAtivos(paginacao);
+        return ResponseEntity.ok(pacientesPaginados);
     }
 
     @PutMapping(value = "pacientes")
@@ -77,10 +79,10 @@ public class ClinicaController {
 
     @DeleteMapping(value = "pacientes/{id}")
     @Transactional
-    public void deletarPaciente(@PathVariable("id") Long id){
+    public ResponseEntity deletarPaciente(@PathVariable("id") Long id){
         var paciente = pacienteService.getMedicoPorId(id);
         paciente.inativar();
-
+        return ResponseEntity.noContent().build();
     }
 
 
