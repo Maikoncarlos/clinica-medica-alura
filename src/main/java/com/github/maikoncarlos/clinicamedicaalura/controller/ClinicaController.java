@@ -6,6 +6,7 @@ import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.pacient
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosCadastroPacienteRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosMedicoResumido;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosPacientesResumido;
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.medico.DadosDetalhadosMedicos;
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.MedicoRepository;
 import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.PacienteRepository;
 import com.github.maikoncarlos.clinicamedicaalura.service.MedicoService;
@@ -19,6 +20,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "v1/clinica-voll")
@@ -33,8 +37,13 @@ public class ClinicaController {
     @PostMapping(value = "medicos")
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrarMedicos(@RequestBody @Valid DadosCadastroMedicoRequest dadosMedico){
-       medicoService.cadastrar(dadosMedico);
+    public ResponseEntity<DadosDetalhadosMedicos> cadastrarMedicos(@RequestBody @Valid DadosCadastroMedicoRequest dadosMedico, UriComponentsBuilder uriComponentsBuilder){
+        DadosDetalhadosMedicos medicoSalvo = medicoService.cadastrar(dadosMedico);
+        URI location = uriComponentsBuilder
+                .path("v1/clinica-voll/medicos/{id}")
+                .buildAndExpand(medicoSalvo.id())
+                .toUri();
+        return ResponseEntity.created(location).body(medicoSalvo);
     }
 
     @GetMapping(value = "medicos/listaPaginada")
@@ -57,6 +66,7 @@ public class ClinicaController {
         medico.inativar();
         return ResponseEntity.noContent().build();
     }
+
     @PostMapping(value = "pacientes")
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
