@@ -35,19 +35,30 @@ public class PacienteController {
                 path("v1/clinica-voll/pacientes/{id}").
                 buildAndExpand(pacienteSalvo.id()).
                 toUri();
+
         return ResponseEntity.created(location).body(pacienteSalvo);
+    }
+
+    @GetMapping(value = "{id}")
+    @Transactional
+    public ResponseEntity<DadosDetalhadosPaciente> buscarPacientePorId(@PathVariable("id") Long id){
+        var paciente = pacienteService.getPacientePorId(id);
+        DadosDetalhadosPaciente pacientePertencenteAoId = mapper.toDadosDetalhadosPacientes(paciente);
+
+        return ResponseEntity.ok().body(pacientePertencenteAoId);
     }
 
     @GetMapping(value = "listaPaginada")
     public ResponseEntity<Page<DadosPacientesResumido>> listarTodosPacientesPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
         Page<DadosPacientesResumido> pacientesPaginados = pacienteService.findAllAtivos(paginacao);
+
         return ResponseEntity.ok(pacientesPaginados);
     }
 
     @PutMapping
     @Transactional
     public ResponseEntity<DadosDetalhadosPaciente> atualizarDadosPacientes(@RequestBody @Valid DadosAtualizacaoPaciente dadosAtualizacaoPaciente){
-        var paciente = pacienteService.getMedicoPorId(dadosAtualizacaoPaciente.id());
+        var paciente = pacienteService.getPacientePorId(dadosAtualizacaoPaciente.id());
         paciente.atualizarDadosMedicos(dadosAtualizacaoPaciente);
 
         return ResponseEntity.ok().body(mapper.toDadosDetalhadosPacientes(paciente));
@@ -56,8 +67,9 @@ public class PacienteController {
     @DeleteMapping(value = "{id}")
     @Transactional
     public ResponseEntity<Void> deletarPaciente(@PathVariable("id") Long id){
-        var paciente = pacienteService.getMedicoPorId(id);
+        var paciente = pacienteService.getPacientePorId(id);
         paciente.inativar();
+
         return ResponseEntity.noContent().build();
     }
 

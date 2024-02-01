@@ -28,7 +28,7 @@ public class PacienteService {
         return repository.findAllByAtivoTrue(paginacao).map(DadosPacientesResumido::new);
     }
 
-    public Paciente getMedicoPorId(Long id) {
+    public Paciente getPacientePorId(Long id) {
         return repository.getReferenceById(id);
     }
 
