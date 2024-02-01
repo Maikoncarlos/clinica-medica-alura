@@ -21,7 +21,7 @@ public class MedicoService {
     public DadosDetalhadosMedicos cadastrar(DadosCadastroMedicoRequest dadosMedico) {
         var medico = mapper.toMedico(dadosMedico);
         Medico medicoSalvo = repository.save(medico);
-        return mapper.toMedicoSaved(medicoSalvo);
+        return mapper.toDadosDetalhadosMedicos(medicoSalvo);
     }
 
     public Page<DadosMedicoResumido> findAllAtivos(Pageable paginacao) {

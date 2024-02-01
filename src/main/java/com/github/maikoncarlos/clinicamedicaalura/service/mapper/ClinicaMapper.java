@@ -18,5 +18,5 @@ public interface ClinicaMapper {
     Medico toMedico(DadosCadastroMedicoRequest request);
     Endereco map(DadosEndereco value);
 
-    DadosDetalhadosMedicos toMedicoSaved(Medico medicoSaved);
+    DadosDetalhadosMedicos toDadosDetalhadosMedicos(Medico medicoSaved);
 }

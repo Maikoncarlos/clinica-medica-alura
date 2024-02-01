@@ -7,10 +7,9 @@ import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.pacient
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosMedicoResumido;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosPacientesResumido;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.medico.DadosDetalhadosMedicos;
-import com.github.maikoncarlos.clinicamedicaalura.repository.medico.MedicoRepository;
-import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.PacienteRepository;
 import com.github.maikoncarlos.clinicamedicaalura.service.MedicoService;
 import com.github.maikoncarlos.clinicamedicaalura.service.PacienteService;
+import com.github.maikoncarlos.clinicamedicaalura.service.mapper.ClinicaMapper;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,8 +30,7 @@ public class ClinicaController {
 
     private MedicoService medicoService;
     private PacienteService pacienteService;
-    private final MedicoRepository medicoRepository;
-    private final PacienteRepository pacienteRepository;
+    private ClinicaMapper mapper;
 
     @PostMapping(value = "medicos")
     @Transactional
@@ -43,27 +41,40 @@ public class ClinicaController {
                 .path("v1/clinica-voll/medicos/{id}")
                 .buildAndExpand(medicoSalvo.id())
                 .toUri();
+
         return ResponseEntity.created(location).body(medicoSalvo);
+    }
+
+    @GetMapping(value = "medicos/{id}")
+    public ResponseEntity<DadosDetalhadosMedicos> buscarMedicoPorId(@PathVariable("id") Long id){
+        var medico = medicoService.getMedicoPorId(id);
+        DadosDetalhadosMedicos medicoPertencenteAoId = mapper.toDadosDetalhadosMedicos(medico);
+
+        return ResponseEntity.ok().body(medicoPertencenteAoId);
     }
 
     @GetMapping(value = "medicos/listaPaginada")
     public ResponseEntity<Page<DadosMedicoResumido>> listarTodosMedicosPaginados(@PageableDefault(size = 5, sort = "nome") Pageable paginacao){
         Page<DadosMedicoResumido> medicosPaginados = medicoService.findAllAtivos(paginacao);
+
         return ResponseEntity.ok(medicosPaginados);
     }
 
     @PutMapping(value = "medicos")
     @Transactional
-    public void atualizarDadosMedicos(@RequestBody @Valid DadosAtualizacaoMedico dadosAtualizacaoMedico){
+    public ResponseEntity<DadosDetalhadosMedicos> atualizarDadosMedicos(@RequestBody @Valid DadosAtualizacaoMedico dadosAtualizacaoMedico){
        var medico = medicoService.getMedicoPorId(dadosAtualizacaoMedico.id());
        medico.atualizarDadosMedicos(dadosAtualizacaoMedico);
+
+       return ResponseEntity.ok().body(mapper.toDadosDetalhadosMedicos(medico));
     }
 
     @DeleteMapping(value = "medicos/{id}")
     @Transactional
-    public ResponseEntity deletarMedico(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deletarMedico(@PathVariable("id") Long id){
         var medico = medicoService.getMedicoPorId(id);
         medico.inativar();
+
         return ResponseEntity.noContent().build();
     }
 
@@ -89,7 +100,7 @@ public class ClinicaController {
 
     @DeleteMapping(value = "pacientes/{id}")
     @Transactional
-    public ResponseEntity deletarPaciente(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deletarPaciente(@PathVariable("id") Long id){
         var paciente = pacienteService.getMedicoPorId(id);
         paciente.inativar();
         return ResponseEntity.noContent().build();
