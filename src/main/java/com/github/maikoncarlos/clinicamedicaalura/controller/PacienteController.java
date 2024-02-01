@@ -3,6 +3,7 @@ package com.github.maikoncarlos.clinicamedicaalura.controller;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosAtualizacaoPaciente;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosCadastroPacienteRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosPacientesResumido;
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.paciente.DadosDetalhadosPaciente;
 import com.github.maikoncarlos.clinicamedicaalura.service.PacienteService;
 import com.github.maikoncarlos.clinicamedicaalura.service.mapper.ClinicaMapper;
 import jakarta.validation.Valid;
@@ -39,9 +40,11 @@ public class PacienteController {
 
     @PutMapping
     @Transactional
-    public void atualizarDadosPacientes(@RequestBody @Valid DadosAtualizacaoPaciente dadosAtualizacaoPaciente){
+    public ResponseEntity<DadosDetalhadosPaciente> atualizarDadosPacientes(@RequestBody @Valid DadosAtualizacaoPaciente dadosAtualizacaoPaciente){
         var paciente = pacienteService.getMedicoPorId(dadosAtualizacaoPaciente.id());
         paciente.atualizarDadosMedicos(dadosAtualizacaoPaciente);
+
+        return ResponseEntity.ok().body(mapper.toDadosDetalhadosPacientes(paciente));
     }
 
     @DeleteMapping(value = "{id}")

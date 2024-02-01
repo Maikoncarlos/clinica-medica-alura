@@ -4,6 +4,7 @@ import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.DadosEn
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.DadosCadastroMedicoRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosCadastroPacienteRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.medico.DadosDetalhadosMedicos;
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.paciente.DadosDetalhadosPaciente;
 import com.github.maikoncarlos.clinicamedicaalura.repository.Endereco;
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.Medico;
 import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.Paciente;
@@ -19,4 +20,6 @@ public interface ClinicaMapper {
     Endereco map(DadosEndereco value);
 
     DadosDetalhadosMedicos toDadosDetalhadosMedicos(Medico medicoSaved);
+
+    DadosDetalhadosPaciente toDadosDetalhadosPacientes(Paciente paciente);
 }
