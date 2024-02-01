@@ -33,7 +33,7 @@ public class MedicoController {
     public ResponseEntity<DadosDetalhadosMedicos> cadastrarMedicos(@RequestBody @Valid DadosCadastroMedicoRequest dadosMedico, UriComponentsBuilder uriComponentsBuilder){
         DadosDetalhadosMedicos medicoSalvo = medicoService.cadastrar(dadosMedico);
         URI location = uriComponentsBuilder
-                .path("/clinica-voll/v1/medicos/{id}")
+                .path("/v1/medicos/{id}")
                 .buildAndExpand(medicoSalvo.id())
                 .toUri();
 

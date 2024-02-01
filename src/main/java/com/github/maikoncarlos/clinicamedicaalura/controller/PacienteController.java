@@ -32,7 +32,7 @@ public class PacienteController {
     public ResponseEntity<DadosDetalhadosPaciente> cadastrarPacientes(@RequestBody @Valid DadosCadastroPacienteRequest dadosPaciente, UriComponentsBuilder uriComponentsBuilder){
         DadosDetalhadosPaciente pacienteSalvo = pacienteService.cadastrar(dadosPaciente);
         URI location = uriComponentsBuilder.
-                path("/clinica-voll/v1/pacientes/{id}").
+                path("/v1/pacientes/{id}").
                 buildAndExpand(pacienteSalvo.id()).
                 toUri();
 
