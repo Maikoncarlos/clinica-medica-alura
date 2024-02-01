@@ -11,10 +11,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "v1/clinica-voll/pacientes")
@@ -27,9 +29,13 @@ public class PacienteController {
 
     @PostMapping
     @Transactional
-    @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrarPacientes(@RequestBody @Valid DadosCadastroPacienteRequest dadosPaciente){
-        pacienteService.cadastrar(dadosPaciente);
+    public ResponseEntity<DadosDetalhadosPaciente> cadastrarPacientes(@RequestBody @Valid DadosCadastroPacienteRequest dadosPaciente, UriComponentsBuilder uriComponentsBuilder){
+        DadosDetalhadosPaciente pacienteSalvo = pacienteService.cadastrar(dadosPaciente);
+        URI location = uriComponentsBuilder.
+                path("v1/clinica-voll/pacientes/{id}").
+                buildAndExpand(pacienteSalvo.id()).
+                toUri();
+        return ResponseEntity.created(location).body(pacienteSalvo);
     }
 
     @GetMapping(value = "listaPaginada")
