@@ -20,7 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "v1/clinica-voll/medicos")
+@RequestMapping(value = "v1/medicos")
 @AllArgsConstructor
 public class MedicoController {
 
@@ -33,7 +33,7 @@ public class MedicoController {
     public ResponseEntity<DadosDetalhadosMedicos> cadastrarMedicos(@RequestBody @Valid DadosCadastroMedicoRequest dadosMedico, UriComponentsBuilder uriComponentsBuilder){
         DadosDetalhadosMedicos medicoSalvo = medicoService.cadastrar(dadosMedico);
         URI location = uriComponentsBuilder
-                .path("v1/clinica-voll/medicos/{id}")
+                .path("/clinica-voll/v1/medicos/{id}")
                 .buildAndExpand(medicoSalvo.id())
                 .toUri();
 
