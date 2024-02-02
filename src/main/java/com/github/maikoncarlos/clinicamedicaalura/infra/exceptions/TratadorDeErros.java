@@ -1,4 +1,4 @@
-package com.github.maikoncarlos.clinicamedicaalura.infra;
+package com.github.maikoncarlos.clinicamedicaalura.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
