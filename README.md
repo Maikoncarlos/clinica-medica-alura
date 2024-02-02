@@ -3,17 +3,21 @@
 
 - Aplicar validações das informações que chegam na nossa API, usando o Bean Validation. Depois, vamos utilizar o conceito de paginação e ordenação das informações que a nossa API vai devolver.
 - Também iremos fazer o Tratamento de Excessões para que cada erro tenha seu status HTTP seguindo as boas práticas, bem como a padronização das mensagens de erros.
+  Funciona o processo de autenticação e autorização em uma API Rest;
+  Processo de autenticação na API Rest, de maneira Stateless, utilizando as classes e configurações do Spring Security, e guardando a informação de senha como hashing utilizando o ByCrypt.
 
 # Tecnologias:
     Spring Boot 3
     Java 17
     Lombok
-    MySQL/ Flyway
-    JPA/Hibernate
+    H2/MySQL/ Flyway
+    Hibernate
     Maven
     Postman
     DTO (Data Transfer Object), via Java Records
     MapStruct
+    Spring Data JPA
+    Spring Security
 
 Faremos tudo isso usando algumas tecnologias, como Spring Boot 3, sendo a última versão disponibilizada pelo framework. Usaremos, também, o Java 17 sendo a última versão LTS (Long-term support, em português "Suporte de longo prazo") que possui maior tempo de suporte disponível para o Java.
 
