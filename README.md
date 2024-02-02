@@ -2,6 +2,7 @@
 - O objetivo neste projeto é usarmos o Spring Boot para desenvolvermos uma API Rest, com algumas funcionalidades. A ideia é desenvolver um CRUD, sendo as quatro operações fundamentais das aplicações: cadastro, listagem, atualização e exclusão de informações.
 
 - Aplicar validações das informações que chegam na nossa API, usando o Bean Validation. Depois, vamos utilizar o conceito de paginação e ordenação das informações que a nossa API vai devolver.
+- Também iremos fazer o Tratamento de Excessões para que cada erro tenha seu status HTTP seguindo as boas práticas, bem como a padronização das mensagens de erros.
 
 # Tecnologias:
     Spring Boot 3
