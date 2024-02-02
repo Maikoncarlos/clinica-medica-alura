@@ -18,6 +18,7 @@ public record DadosCadastroPacienteRequest(
         @Pattern(regexp = "\\d{9}")
         String telefone,
         @CPF
+        @NotBlank
         @Pattern(regexp = "\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}")
         String cpf,
         @NotNull @Valid

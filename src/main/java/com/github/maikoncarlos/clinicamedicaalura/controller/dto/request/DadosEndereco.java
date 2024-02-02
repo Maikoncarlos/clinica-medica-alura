@@ -10,6 +10,7 @@ public record DadosEndereco(
         String cep,
         @NotBlank
         String logradouro,
+        @NotBlank
         String numero,
         String complemento,
         @NotBlank
