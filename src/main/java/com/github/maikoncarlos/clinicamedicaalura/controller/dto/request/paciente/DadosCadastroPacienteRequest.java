@@ -9,17 +9,17 @@ import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.br.CPF;
 
 public record DadosCadastroPacienteRequest(
-        @NotBlank
+        @NotBlank(message = "{nome.obrigatorio}")
         String nome,
-        @NotBlank
-        @Email
+        @NotBlank(message = "{email.obrigatorio}")
+        @Email(message = "{email.invalido}")
         String email,
-        @NotBlank
-        @Pattern(regexp = "\\d{9}")
+        @NotBlank(message = "{telefone.obrigatorio}")
+        @Pattern(regexp = "\\d{9}", message = "{telefone.invalido}")
         String telefone,
         @CPF
-        @NotBlank
-        @Pattern(regexp = "\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}")
+        @NotBlank(message = "{cpf.obrigatorio}")
+        @Pattern(regexp = "\\d{3}.?\\d{3}.?\\d{3}-?\\d{2}", message = "{cpf.invalido}")
         String cpf,
-        @NotNull @Valid
-        DadosEndereco endereco) { }
+        @NotNull(message = "{endereco.obrigatorio}")
+        @Valid DadosEndereco endereco) {}
