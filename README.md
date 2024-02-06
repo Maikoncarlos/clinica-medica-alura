@@ -1,10 +1,12 @@
 # Objetivos:
 - O objetivo neste projeto é usarmos o Spring Boot para desenvolvermos uma API Rest, com algumas funcionalidades. A ideia é desenvolver um CRUD, sendo as quatro operações fundamentais das aplicações: cadastro, listagem, atualização e exclusão de informações.
 
-- Aplicar validações das informações que chegam na nossa API, usando o Bean Validation. Depois, vamos utilizar o conceito de paginação e ordenação das informações que a nossa API vai devolver.
-- Também iremos fazer o Tratamento de Excessões para que cada erro tenha seu status HTTP seguindo as boas práticas, bem como a padronização das mensagens de erros.
-  Funciona o processo de autenticação e autorização em uma API Rest;
-  Processo de autenticação na API Rest, de maneira Stateless, utilizando as classes e configurações do Spring Security, e guardando a informação de senha como hashing utilizando o ByCrypt.
+-  Aplicar validações das informações que chegam na nossa API, usando o Bean Validation. Depois, vamos utilizar o conceito de paginação e ordenação das informações que a nossa API vai devolver.
+-  Também iremos fazer o Tratamento de Excessões para que cada erro tenha seu status HTTP seguindo as boas práticas, bem como a padronização das mensagens de erros.
+-  Funciona o processo de autenticação e autorização em uma API Rest;
+-  Processo de autenticação na API Rest, de maneira Stateless, utilizando as classes e configurações do Spring Security, e guardando a informação de senha como hashing utilizando o ByCrypt.
+-  Injetar uma propriedade do arquivo application.properties em uma classe gerenciada pelo Spring, utilizando a anotação @Value, para que não tenha informações sensível de forma explicita dentro do projeto;
+-  Devolver um token JWT gerado na API quando um usuário se autenticar nela.
 
 # Tecnologias:
     Spring Boot 3
@@ -18,6 +20,7 @@
     MapStruct
     Spring Data JPA
     Spring Security
+    Token com Auth0 JWT
 
 Faremos tudo isso usando algumas tecnologias, como Spring Boot 3, sendo a última versão disponibilizada pelo framework. Usaremos, também, o Java 17 sendo a última versão LTS (Long-term support, em português "Suporte de longo prazo") que possui maior tempo de suporte disponível para o Java.
 

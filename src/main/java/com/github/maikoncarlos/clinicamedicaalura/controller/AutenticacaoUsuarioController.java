@@ -1,7 +1,8 @@
 package com.github.maikoncarlos.clinicamedicaalura.controller;
 
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.usuario.DadosUsuario;
-import com.github.maikoncarlos.clinicamedicaalura.service.mapper.ClinicaMapper;
+import com.github.maikoncarlos.clinicamedicaalura.infra.security.TokenJWTDTO;
+import com.github.maikoncarlos.clinicamedicaalura.infra.security.TokenService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AutenticacaoUsuarioController {
 
     private final AuthenticationManager manager;
-    private final ClinicaMapper mapper;
+    private final TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity efetuarLogin(@RequestBody @Valid DadosUsuario usuario){
+    public ResponseEntity<TokenJWTDTO> efetuarLogin(@RequestBody @Valid DadosUsuario usuario){
         manager.authenticate(
                 new UsernamePasswordAuthenticationToken(usuario.login(), usuario.senha()));
-        return ResponseEntity.ok().build();
+
+        var tokenJWT = new TokenJWTDTO(tokenService.gerarToken(usuario));
+        return ResponseEntity.ok(tokenJWT);
     }
 }
