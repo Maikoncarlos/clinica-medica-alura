@@ -7,13 +7,22 @@
 -  Processo de autenticação na API Rest, de maneira Stateless, utilizando as classes e configurações do Spring Security, e guardando a informação de senha como hashing utilizando o ByCrypt.
 -  Injetar uma propriedade do arquivo application.properties em uma classe gerenciada pelo Spring, utilizando a anotação @Value, para que não tenha informações sensível de forma explicita dentro do projeto;
 -  Devolver um token JWT gerado na API quando um usuário se autenticar nela.
+- SOLID é uma sigla que representa cinco princípios de programação:
+    Single Responsibility Principle (Princípio da Responsabilidade Única)
+    Open-Closed Principle (Princípio Aberto-Fechado)
+    Liskov Substitution Principle (Princípio da Substituição de Liskov)
+    Interface Segregation Principle (Princípio da Segregação de Interface)
+    Dependency Inversion Principle (Princípio da Inversão de Dependência)
+- 
 
 # Tecnologias:
     Spring Boot 3
     Java 17
+    SOLID
     Lombok
-    H2/MySQL/ Flyway
+    H2/MySQL/Flyway
     Hibernate
+    Implementar uma consulta JPQL (Java Persistence Query Language) complexa em uma interface repository, utilizando para isso a anotação @Query.
     Maven
     Postman
     DTO (Data Transfer Object), via Java Records
