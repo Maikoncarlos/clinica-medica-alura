@@ -3,11 +3,13 @@ package com.github.maikoncarlos.clinicamedicaalura.service.mapper;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.DadosEndereco;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.DadosCadastroMedicoRequest;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosCadastroPacienteRequest;
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.usuario.DadosUsuario;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.medico.DadosDetalhadosMedicos;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.paciente.DadosDetalhadosPaciente;
 import com.github.maikoncarlos.clinicamedicaalura.repository.Endereco;
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.Medico;
 import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.Paciente;
+import com.github.maikoncarlos.clinicamedicaalura.repository.usuario.Usuario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -22,4 +24,6 @@ public interface ClinicaMapper {
     DadosDetalhadosMedicos toDadosDetalhadosMedicos(Medico medicoSaved);
 
     DadosDetalhadosPaciente toDadosDetalhadosPacientes(Paciente paciente);
+
+    Usuario toUsuario(DadosUsuario dadosUsuario);
 }
