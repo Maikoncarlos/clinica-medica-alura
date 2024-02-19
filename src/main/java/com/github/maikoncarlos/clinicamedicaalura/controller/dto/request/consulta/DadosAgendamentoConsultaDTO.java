@@ -1,6 +1,7 @@
 package com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.consulta;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 
@@ -14,5 +15,6 @@ public record DadosAgendamentoConsultaDTO(
         Long idPaciente,
         @NotNull
         @Future
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
         LocalDateTime data) {
 }
