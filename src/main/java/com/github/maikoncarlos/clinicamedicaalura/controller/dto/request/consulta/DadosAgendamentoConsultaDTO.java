@@ -2,6 +2,7 @@ package com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.consul
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.medico.Especialidade;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,6 +14,7 @@ public record DadosAgendamentoConsultaDTO(
         @NotNull
         @JsonAlias("paciente_id")
         Long idPaciente,
+        Especialidade especialidade,
         @NotNull
         @Future
         @JsonFormat(pattern = "dd/MM/yyyy HH:mm")

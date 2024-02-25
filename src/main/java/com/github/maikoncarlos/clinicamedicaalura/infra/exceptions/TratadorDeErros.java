@@ -24,7 +24,7 @@ public class TratadorDeErros {
 
     @ExceptionHandler (DataIntegrityViolationException.class)
     public ResponseEntity<String> tratarViolationException(DataIntegrityViolationException exception) {
-        var error = "email já cadastrado!";
+        var error = exception.getMessage();
         return ResponseEntity.badRequest().body(error);
     }
 
@@ -36,6 +36,11 @@ public class TratadorDeErros {
 
     @ExceptionHandler (HttpMessageNotReadableException.class)
     public ResponseEntity tratarErro400(HttpMessageNotReadableException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
+    @ExceptionHandler (ValidacaoException.class)
+    public ResponseEntity tratarErro400(ValidacaoException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
