@@ -9,8 +9,11 @@ import com.github.maikoncarlos.clinicamedicaalura.repository.consulta.ConsultaRe
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.Medico;
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.MedicoRepository;
 import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.PacienteRepository;
+import com.github.maikoncarlos.clinicamedicaalura.service.validacoes.ValidadorAgendamentoDeConsulta;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +22,7 @@ public class AgendamentoConsultasService {
     private final ConsultaRepository consultaRepository;
     private final MedicoRepository medicoRepository;
     private final PacienteRepository pacienteRepository;
+    private final List<ValidadorAgendamentoDeConsulta> validadores;
 
     public DadosConsultaResponse agendar(DadosAgendamentoConsultaDTO dados) {
 
@@ -28,6 +32,9 @@ public class AgendamentoConsultasService {
         if (dados.idMedico() != null && !medicoRepository.existsById(dados.idMedico())) {
             throw new ValidacaoException("ERROR - medico do ID informado não existe!");
         }
+
+        validadores.forEach( validadores -> validadores.validar(dados));
+
         var medico = escolherMedicoDaEspecialidadeAleatoriamente(dados);
 
         var consulta = consultaRepository.save(new Consulta(null, medico, paciente, dados.data(), null));
