@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +37,10 @@ public class AgendamentoConsultasService {
         validadores.forEach( validadores -> validadores.validar(dados));
 
         var medico = escolherMedicoDaEspecialidadeAleatoriamente(dados);
+
+        if(Objects.isNull(medico)){
+            throw new ValidacaoException("Não tem nenhum médico disonível para atendimento!");
+        }
 
         var consulta = consultaRepository.save(new Consulta(null, medico, paciente, dados.data(), null));
 
