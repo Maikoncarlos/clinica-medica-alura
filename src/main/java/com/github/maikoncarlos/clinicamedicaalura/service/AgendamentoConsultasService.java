@@ -1,5 +1,6 @@
 package com.github.maikoncarlos.clinicamedicaalura.service;
 
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.DadosCancelamentoDTO;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.consulta.DadosAgendamentoConsultaDTO;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.consulta.DadosConsultaResponse;
 import com.github.maikoncarlos.clinicamedicaalura.infra.exceptions.ValidacaoException;
@@ -29,7 +30,7 @@ public class AgendamentoConsultasService {
         }
         var medico = escolherMedicoDaEspecialidadeAleatoriamente(dados);
 
-        var consulta = consultaRepository.save(new Consulta(null, medico, paciente, dados.data()));
+        var consulta = consultaRepository.save(new Consulta(null, medico, paciente, dados.data(), null));
 
         return new DadosConsultaResponse(consulta.getId(), consulta.getMedico().getId(), consulta.getPaciente().getId(), consulta.getData());
     }
@@ -46,4 +47,11 @@ public class AgendamentoConsultasService {
         return medicoRepository.getReferenceById(dados.idMedico());
     }
 
+    public void cancelar(DadosCancelamentoDTO cancelamentoDTO) {
+        if(!consultaRepository.existsById(cancelamentoDTO.idConsulta())){
+            throw new ValidacaoException("ERROR - Id da consulta informado não existe!");
+        }
+        var consulta = consultaRepository.getReferenceById(cancelamentoDTO.idConsulta());
+        consulta.cancelar(cancelamentoDTO.motivo());
+    }
 }

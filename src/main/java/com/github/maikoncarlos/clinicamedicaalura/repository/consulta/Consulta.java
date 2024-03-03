@@ -1,5 +1,6 @@
 package com.github.maikoncarlos.clinicamedicaalura.repository.consulta;
 
+import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.MotivoCancelamentoEnum;
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.Medico;
 import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.Paciente;
 import jakarta.persistence.*;
@@ -31,4 +32,12 @@ public class Consulta {
     private Paciente paciente;
 
     private LocalDateTime data;
+
+    @Column(name = "motivo_cancelamento")
+    @Enumerated(EnumType.STRING)
+    private MotivoCancelamentoEnum motivoCancelamento;
+
+    public void cancelar(MotivoCancelamentoEnum motivo) {
+        this.motivoCancelamento = motivo;
+    }
 }
