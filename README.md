@@ -55,16 +55,20 @@ Usaremos o Maven para gerenciar as dependências do projeto, e também para gera
 
 Mas para testarmos a API, usaremos o Postman, sendo uma ferramenta usada para testes em API. Com ela, conseguimos simular a requisição para a API e verificar se as funcionalidades implementadas estão funcionando.
 
-### Links para documentação local do projeto:
+Uma outra forma de testar seria Adicionar a biblioteca SpringDoc no projeto para que ela faça a geração automatizada da documentação da API;
+  - https://springdoc.org/
+
+Utilizar o Swagger UI para visualizar e testar uma API Rest, com os links abaixo;
+### - Links para documentação local do projeto:
   - http://localhost:8080/clinica-voll/v3/api-docs
   - http://localhost:8080/clinica-voll/swagger-ui/index.html
 
-### Estamos aplicando os seguintes princípios do SOLID na parte de validadores de agendamento de consulta:
+### - Estamos aplicando os seguintes princípios do SOLID na parte de validadores de agendamento de consulta:
 
 - Single Responsibility Principle (Princípio da responsabilidade única): porque cada classe de validação tem apenas uma responsabilidade.
 - Open-Closed Principle (Princípio aberto-fechado): na classe service, AgendadeConsultas, porque ela está fechada para modificação, não precisamos mexer nela. Mas ela está aberta para extensão, conseguimos adicionar novos validadores apenas criando as classes implementando a interface.
 - Dependency Inversion Principle (Princípio da inversão de dependência): porque nossa classe service depende de uma abstração, que é a interface, não depende dos validadores, das implementações especificamente. O módulo de alto nível, a service, não depende dos módulos de baixo nível, que são os validadores.
-#### Com isso ganhamos um código fácil de entender, fácil de dar manutenção, fácil de estender e de testar com testes automatizados.
+### - Com isso ganhamos um código fácil de entender, fácil de dar manutenção, fácil de estender e de testar com testes automatizados.
 
 
 
