@@ -10,6 +10,7 @@ import com.github.maikoncarlos.clinicamedicaalura.repository.medico.Medico;
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.MedicoRepository;
 import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.PacienteRepository;
 import com.github.maikoncarlos.clinicamedicaalura.service.validacoes.ValidadorAgendamentoDeConsulta;
+import com.github.maikoncarlos.clinicamedicaalura.service.validacoesCancelamento.ValidadorCancelamentoDeConsulta;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class AgendamentoConsultasService {
     private final MedicoRepository medicoRepository;
     private final PacienteRepository pacienteRepository;
     private final List<ValidadorAgendamentoDeConsulta> validadores;
+    private final List<ValidadorCancelamentoDeConsulta> validadoresCancelamento;
 
     public DadosConsultaResponse agendar(DadosAgendamentoConsultaDTO dados) {
 
@@ -63,6 +65,9 @@ public class AgendamentoConsultasService {
         if(!consultaRepository.existsById(cancelamentoDTO.idConsulta())){
             throw new ValidacaoException("ERROR - Id da consulta informado não existe!");
         }
+
+        validadoresCancelamento.forEach(valid -> valid.validar(cancelamentoDTO));
+
         var consulta = consultaRepository.getReferenceById(cancelamentoDTO.idConsulta());
         consulta.cancelar(cancelamentoDTO.motivo());
     }
