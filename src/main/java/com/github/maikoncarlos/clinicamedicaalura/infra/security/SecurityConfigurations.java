@@ -27,8 +27,10 @@ public class SecurityConfigurations {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "v1/login").permitAll();
+                    req.requestMatchers("v/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     req.requestMatchers(HttpMethod.DELETE, "v1/medicos").hasRole("ADMIN");
                     req.requestMatchers(HttpMethod.DELETE, "v1/pacientes").hasRole("ADMIN");
+
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)

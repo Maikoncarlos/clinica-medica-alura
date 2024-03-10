@@ -41,6 +41,7 @@ https://trello.com/b/O0lGCsKb/api-voll-med
     Spring Data JPA
     Spring Security
     Token com Auth0 JWT
+    Documentação com SpringDoc
 
 Faremos tudo isso usando algumas tecnologias, como Spring Boot 3, sendo a última versão disponibilizada pelo framework. Usaremos, também, o Java 17 sendo a última versão LTS (Long-term support, em português "Suporte de longo prazo") que possui maior tempo de suporte disponível para o Java.
 
