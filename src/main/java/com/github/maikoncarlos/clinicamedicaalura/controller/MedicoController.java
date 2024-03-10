@@ -6,6 +6,7 @@ import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.DadosM
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.medico.DadosDetalhadosMedicos;
 import com.github.maikoncarlos.clinicamedicaalura.service.MedicoService;
 import com.github.maikoncarlos.clinicamedicaalura.service.mapper.ClinicaMapper;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import java.net.URI;
 @RestController
 @RequestMapping(value = "v1/medicos")
 @AllArgsConstructor
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
     private MedicoService medicoService;

@@ -4,6 +4,7 @@ import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.DadosCa
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.consulta.DadosAgendamentoConsultaDTO;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.response.consulta.DadosConsultaResponse;
 import com.github.maikoncarlos.clinicamedicaalura.service.AgendamentoConsultasService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "v1/consultas")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearer-key")
 public class ConsultaController {
 
     private final AgendamentoConsultasService consultasService;

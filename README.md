@@ -55,6 +55,10 @@ Usaremos o Maven para gerenciar as dependências do projeto, e também para gera
 
 Mas para testarmos a API, usaremos o Postman, sendo uma ferramenta usada para testes em API. Com ela, conseguimos simular a requisição para a API e verificar se as funcionalidades implementadas estão funcionando.
 
+### Links para documentação local do projeto:
+  - http://localhost:8080/clinica-voll/v3/api-docs
+  - http://localhost:8080/clinica-voll/swagger-ui/index.html
+
 ### Estamos aplicando os seguintes princípios do SOLID na parte de validadores de agendamento de consulta:
 
 - Single Responsibility Principle (Princípio da responsabilidade única): porque cada classe de validação tem apenas uma responsabilidade.
