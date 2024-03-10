@@ -1,4 +1,4 @@
-package com.github.maikoncarlos.clinicamedicaalura.service.validacoes;
+package com.github.maikoncarlos.clinicamedicaalura.service.validacoes.agendamento;
 
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.consulta.DadosAgendamentoConsultaDTO;
 import com.github.maikoncarlos.clinicamedicaalura.infra.exceptions.ValidacaoException;

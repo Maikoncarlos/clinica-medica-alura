@@ -1,4 +1,4 @@
-package com.github.maikoncarlos.clinicamedicaalura.service.validacoesCancelamento;
+package com.github.maikoncarlos.clinicamedicaalura.service.validacoes.cancelamento;
 
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.DadosCancelamentoDTO;
 

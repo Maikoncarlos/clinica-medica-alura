@@ -9,8 +9,8 @@ import com.github.maikoncarlos.clinicamedicaalura.repository.consulta.ConsultaRe
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.Medico;
 import com.github.maikoncarlos.clinicamedicaalura.repository.medico.MedicoRepository;
 import com.github.maikoncarlos.clinicamedicaalura.repository.paciente.PacienteRepository;
-import com.github.maikoncarlos.clinicamedicaalura.service.validacoes.ValidadorAgendamentoDeConsulta;
-import com.github.maikoncarlos.clinicamedicaalura.service.validacoesCancelamento.ValidadorCancelamentoDeConsulta;
+import com.github.maikoncarlos.clinicamedicaalura.service.validacoes.agendamento.ValidadorAgendamentoDeConsulta;
+import com.github.maikoncarlos.clinicamedicaalura.service.validacoes.cancelamento.ValidadorCancelamentoDeConsulta;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
