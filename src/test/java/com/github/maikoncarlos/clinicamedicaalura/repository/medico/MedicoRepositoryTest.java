@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 // TODO configuração para rodar os testes no mesmo banco da aplicação
@@ -34,25 +35,36 @@ class MedicoRepositoryTest {
     Medico medico;
     Paciente paciente;
 
+    LocalDateTime dataConsultaNaProximaSegundaAsDez;
+
     @BeforeEach
     void setUp() {
         medico = cadastrarMedico("Medico", "medico2voll.med", "123456", Especialidade.CARDIOLOGIA);
         paciente = cadastrarPaciente("Paciente", "paciente@voll.med", "91054554056");
+        dataConsultaNaProximaSegundaAsDez = LocalDateTime.now()
+                .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+                .toLocalDate().atTime(10, 0);
     }
 
     @Test
     @DisplayName("Cenário1 - Deve devolver null quando o unico medico não estiver disponivel na data")
     void escolherMedicoAleatorioLivreNaData_Cenario1() {
 
-        var dataConsultaNaProximaSegundaAsDez = LocalDateTime.now()
-                .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
-                .toLocalDate().atTime(10, 0);
-
         cadastrarConsulta(medico, paciente, dataConsultaNaProximaSegundaAsDez);
 
         var medicoLivre = medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA, dataConsultaNaProximaSegundaAsDez);
 
-       assertThat(medicoLivre).isNull();
+        assertThat(medicoLivre).isNull();
+
+    }
+
+    @Test
+    @DisplayName("Cenário2 - Deve devolver Medico Livre quando o medico estiver disponivel na data")
+    void escolherMedicoAleatorioLivreNaData_Cenario2() {
+        var medicoLivre = medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA, dataConsultaNaProximaSegundaAsDez);
+
+        assertThat(medicoLivre).isNotNull();
+        assertEquals(medico, medicoLivre);
 
     }
 
