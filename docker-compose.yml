@@ -3,12 +3,22 @@ services:
     image: mysql
     ports:
       - "3306:3306"
-    expose:
-      - "3306"
     environment:
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
       - MYSQL_DATABASE=db_clinica-voll
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - "./conf.d:/etc/mysql/conf.d:ro"
+
+  mysql_teste:
+    image: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=db_clinica-voll-teste
       - MYSQL_ROOT_PASSWORD=password
     volumes:
       - "./conf.d:/etc/mysql/conf.d:ro"
