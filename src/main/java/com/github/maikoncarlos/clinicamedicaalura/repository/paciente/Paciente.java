@@ -3,14 +3,12 @@ package com.github.maikoncarlos.clinicamedicaalura.repository.paciente;
 import com.github.maikoncarlos.clinicamedicaalura.controller.dto.request.paciente.DadosAtualizacaoPaciente;
 import com.github.maikoncarlos.clinicamedicaalura.repository.Endereco;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode (of = "id")
 @Table(name = "pacientes")
 @Entity(name = "Paciente")

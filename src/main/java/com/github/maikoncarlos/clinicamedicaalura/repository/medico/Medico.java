@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Table(name = "medicos")
 @Entity(name = "Medico")
