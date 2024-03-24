@@ -42,6 +42,8 @@ https://trello.com/b/O0lGCsKb/api-voll-med
     Spring Security
     Token com Auth0 JWT
     Documentação com SpringDoc
+    JUnit5
+    Mockito
 
 Faremos tudo isso usando algumas tecnologias, como Spring Boot 3, sendo a última versão disponibilizada pelo framework. Usaremos, também, o Java 17 sendo a última versão LTS (Long-term support, em português "Suporte de longo prazo") que possui maior tempo de suporte disponível para o Java.
 
@@ -62,6 +64,15 @@ Utilizar o Swagger UI para visualizar e testar uma API Rest, com os links abaixo
 ### - Links para documentação local do projeto:
   - http://localhost:8080/clinica-voll/v3/api-docs
   - http://localhost:8080/clinica-voll/swagger-ui/index.html
+  - 
+
+Para fazer os Testes de Nossa aplicação:
+Utilizamos testes automatizados de uma interface Repository, seguindo a estratégia de usar o mesmo banco de dados que a aplicação utiliza, sobreescrevemos as propriedades do arquivo application.properties, criando outro arquivo
+
+chamado application-test.properties que seja carregado apenas ao executar os testes, utilizando para isso a anotação @ActiveProfiles("test"). Escrever testes automatizados das classes Controllers, utilizando a classe MockMvc para 
+
+simular requisições na API, testando os todos os cenários de erro e os de sucesso, além de testes unitários nas camadas de Service.
+
 
 ### - Estamos aplicando os seguintes princípios do SOLID na parte de validadores de agendamento de consulta:
 
